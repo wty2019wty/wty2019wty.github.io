@@ -19,6 +19,7 @@ disableKinds = ["taxonomy", "term"]
 
   ]
 
+
 [markup.highlight]
   noClasses = true
 
