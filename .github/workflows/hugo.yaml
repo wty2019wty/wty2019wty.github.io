@@ -42,6 +42,7 @@ jobs:
           publish_branch: main
           publish_dir: ./public
 	  destination: public
+
           # 可选配置, 每次博客更新后, 本仓库会自动往<username>.github.io仓库提交一次更新后的网站内容
           # 添加该项配置后, <username>.github.io仓库的提交信息就会使用本仓库的提交信息
           commit_message: ${{ github.event.head_commit.message }}
