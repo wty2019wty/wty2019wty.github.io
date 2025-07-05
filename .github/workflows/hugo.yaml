@@ -1,78 +1,47 @@
-# 用于构建和部署Hugo网站到GitHub Pages的示例工作流程
-name: 发布Hugo网站到Pages
+name: GitHub Pages
 
 on:
-  # 在目标为默认分支的推送上运行
   push:
     branches:
       - main
-
-  # 允许您手动从“Actions”标签运行此工作流程
-  workflow_dispatch:
-
-# 设置GITHUB_TOKEN的权限，以允许部署到GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-# 仅允许一个并发部署，跳过在进行中的运行与最新排队的运行之间排队的运行。
-# 但是，请不要取消进行中的运行，因为我们希望这些生产部署能够完成。
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
-# 默认使用bash
-defaults:
-  run:
-    shell: bash
+  pull_request:
 
 jobs:
-  # 构建作业
-  build:
-    runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.147.9
-    steps:
-      - name: 安装Hugo CLI
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb          
-      - name: 安装Dart Sass
-        run: sudo snap install dart-sass
-      - name: 检出
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-          fetch-depth: 0
-      - name: 设置Pages
-        id: pages
-        uses: actions/configure-pages@v3
-      - name: 安装Node.js依赖
-        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
-      - name: 使用Hugo构建
-        env:
-          # 为了与Hugo模块的最大向后兼容性
-          HUGO_ENVIRONMENT: production
-          HUGO_ENV: production
-        run: |
-          hugo \
-            --gc \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"          
-      - name: 上传构建产物
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./public
-
-  # 部署作业
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+    # 这里指定ubuntu为最新版本, 使用指定版本也可, 比如 ubuntu-22.04
     runs-on: ubuntu-latest
-    needs: build
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
     steps:
-      - name: 部署到GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          # 运行hugo version可以查看本地hugo版本
+          # 这里使用最新版本的hugo, 也可写具体的版本号, 与本地hugo版本保持一致, 比如 0.138.0
+          hugo-version: latest
+          # 查看hugo version的结果，如果本地是extended版本，就设置成true，反之设置成false
+          extended: true
+
+      - name: Build
+        run: hugo  # 命令可以修改，比如草稿文章也想发表可改成hugo -D
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        if: github.ref == 'refs/heads/main'
+        with:
+          # HUGO_TOKEN就是上面Actions Secret取的名字，要与自己取的名字保持一致
+          personal_token: ${{ secrets.HUGO_TOKEN }}
+          # <username>替换成自己的用户名
+          external_repository: wty2019wty/wty2019wty.github.io
+          # 现在默认分支都用main，比如用的是master分支，则改为master
+          publish_branch: main
+          publish_dir: ./public
+          # 可选配置, 每次博客更新后, 本仓库会自动往<username>.github.io仓库提交一次更新后的网站内容
+          # 添加该项配置后, <username>.github.io仓库的提交信息就会使用本仓库的提交信息
+          commit_message: ${{ github.event.head_commit.message }}
+          cname: https://huxinme.top  # 填写自己的自定义域名, 如果没有自定义域名, 删除该项配置
