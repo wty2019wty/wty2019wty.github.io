@@ -17,7 +17,7 @@ disableKinds = ["taxonomy", "term"]
 #   { link = { href = "http://rui9981.top/", text = "rui9981.top"} },
     { link = { href = "https://486520.xyz/", text = "Awa Subaru"} },
     { link = { href = "https://sub.9981000.xyz/", text = "Substracker"} },
-    { link = { href = "http://hbsx.zyeidc.cn:50077/status/mc", text = "Uptime Kuma"} },
+    { link = { href = "https://status.486520.xyz/status/mc", text = "status"} },
     { github = "https://github.com/wty2019wty/" },
  
 
