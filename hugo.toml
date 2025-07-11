@@ -9,19 +9,15 @@ disableKinds = ["taxonomy", "term"]
   headline = "2025"
   image = "author.jpg"
   links = [
-    { link = { href = "https://www.bilibili.com/video/av200912245", text = "怖くないわけない，でも止まんない"} },
-    { link = { href = "https://genshin.hoyoverse.com/zh-tw", text = "Our paths will surely cross"} },
-    
+    { link = { href = "https://486520.xyz/", text = "AwaSubaru"} },
+    { link = { href = "https://um.9981000.xyz/", text = "um", icon = "um-react" } },
+    { link = { href = "https://status.486520.xyz/status/mc", text = "status",icon = "uptime-kuma"}},
     { link = { href = "https://space.bilibili.com/383861089", text = "BiliBili", icon = "bilibili" } },
-    { link = { href = "https://um.9981000.xyz/", text = "um-react", icon = "um-react" } },
-#   { link = { href = "http://rui9981.top/", text = "rui9981.top"} },
-    { link = { href = "https://486520.xyz/", text = "Awa Subaru"} },
-    { link = { href = "https://sub.9981000.xyz/", text = "Substracker"} },
-    { link = { href = "https://status.486520.xyz/status/mc", text = "status"} },
     { github = "https://github.com/wty2019wty/" },
- 
 
   ]
+
+
 
 
 [markup.highlight]
