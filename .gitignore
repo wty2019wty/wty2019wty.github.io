@@ -3,6 +3,7 @@ public
 resources
 .hugo_build.lock
 
+
 # hugoÃüÁî
 hugo.exe
 *.bak
