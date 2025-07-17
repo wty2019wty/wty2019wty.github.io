@@ -1,0 +1,3 @@
+<!-- layouts/partials/scripts.html -->
+{{ $js := resources.Get "js/sakuraPlus.js" | minify | fingerprint }}
+<script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>    
