@@ -10,7 +10,7 @@ disableKinds = ["taxonomy", "term"]
   image = "author.jpg"
   links = [
     { link = { href = "https://486520.xyz/", text = "AwaSubaru"} },
-    { link = { href = "http://um.9981000.xyz/", text = "um", icon = "um-react" } },
+    { link = { href = "https://um.9981000.xyz/", text = "um", icon = "um-react" } },
     { link = { href = "https://s.486520.xyz", text = "status",icon = "uptime-kuma"}},
     { link = { href = "https://space.bilibili.com/383861089", text = "BiliBili", icon = "bilibili" } },
     { github = "https://github.com/wty2019wty/" },
