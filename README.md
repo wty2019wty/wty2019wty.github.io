@@ -41,7 +41,9 @@
 
 
 
-输出目录：public
- 构建命令：npm run build
- 安装命令：HUGO_BIN_EXTENDED=true npm install --save-dev cross-env
+输出目录：`public`
+
+构建命令：`npm run build`
+
+安装命令：`HUGO_BIN_EXTENDED=true npm install --save-dev cross-env`
 
