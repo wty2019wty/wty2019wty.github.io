@@ -14,7 +14,7 @@
 
 #### Hugo 在 EdgeOne Pages 部署
 
-首先在git仓库里添加一个文件：`package.json`，代码如下：
+首先在git仓库里添加一个文件：[`package.json`](package.json)，代码如下：
 
 ```language-javascript
 {
