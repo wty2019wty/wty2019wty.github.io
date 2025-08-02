@@ -11,7 +11,7 @@ disableKinds = ["taxonomy", "term"]
   links = [
     { link = { href = "https://486520.xyz/", text = "AwaSubaru"} },
     { link = { href = "https://um-react.netlify.app/", text = "um", icon = "um-react" } },
-    { link = { href = "https://s.486520.xyz", text = "status",icon = "uptime-kuma"}},
+#    { link = { href = "https://s.486520.xyz", text = "status",icon = "uptime-kuma"}},
     { link = { href = "https://space.bilibili.com/383861089", text = "BiliBili", icon = "bilibili" } },
     { github = "https://github.com/wty2019wty/" },
 
